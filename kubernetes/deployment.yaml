@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: second-app-deployment
+spec:
+  replicas: 1
+  selector: # Pod를 선택하는 방법을 정의
+    matchLabels:
+      app: second-app
+      tier: backend
+    # matchExpressions:
+    #   - {key: app, operator: In, values: [second-app, first-app]}
+  template: 
+    metadata:
+      labels:
+        # Pod의 label을 정의, key-value 형태로 정의되며 값은 사용자가 정의, selector와 매칭되어야 함
+        app: second-app
+        tier: backend
+    spec:
+      containers:
+        - name: second-node
+          image: eunhomoon/kub-first-app:2
+          imagePullPolicy: Always 
+          # 이미지를 받아오는 정책 설정, Always: 항상 받아옴, IfNotPresent: 이미지가 없을 때만 받아옴, Never: 받아오지 않음
+          livenessProbe: # Pod의 상태를 체크하는 Probe 설정
+            httpGet:
+              path: /
+              port: 7070
+            periodSeconds: 10
+            initialDelaySeconds: 5
+          resources: # Pod의 자원 제한 설정
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 200m
+              memory: 200Mi

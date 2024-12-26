@@ -67,3 +67,16 @@
 - type
   - ClusterIP:
   - LoadBalancer
+
+### Kubernetes Volumes
+
+- Docker의 Volume 시스템을 사용하지만 더 많은 기능과 구성 옵션을 가지고 있다.
+- Pod 단위에서 공유 가능(같은 Pod 내의 여러 컨테이너가 하나의 Volume을 공유 가능)
+- Volume의 수명은 Pod의 수명과 동일(PersistentVolume 사용시 Pod와 관계없이 유지 가능)
+- 다양한 Volume 유형 지원원
+
+#### PersistentVolume(영구 볼륨)
+
+- Pod가 아닌 Kubernetes Cluster 리소스
+- 따라서 Pod 및 노드에 의존하지 않으며, Pod 수명 주기와 완전히 분리된 수명 주기를 갖는다.
+- Pod는 내부에 PersistentVolume Claim을 두고고, 이를 통해 PersistentVolume에 엑세스할 수 있다.

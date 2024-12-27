@@ -80,3 +80,11 @@
 - Pod가 아닌 Kubernetes Cluster 리소스
 - 따라서 Pod 및 노드에 의존하지 않으며, Pod 수명 주기와 완전히 분리된 수명 주기를 갖는다.
 - Pod는 내부에 PersistentVolume Claim을 두고고, 이를 통해 PersistentVolume에 엑세스할 수 있다.
+
+### Kubernetes Network
+
+- ClusterIp: 클러스터 내부에서만 사용 가능
+  - Kubernetes 환경 변수 사용(예: [SERVICE_NAME]\_SERVICE_HOST)
+  - DNS 사용(예: [service-name].[namespace].svc.cluster.local)
+- NodePort: 외부에서 접근 가능, Node의 IP와 Port를 통해 접근 가능
+- LoadBalancer: 외부에서 접근 가능, 클라우드 서비스의 로드 밸런서를 사용하여 외부로 노출

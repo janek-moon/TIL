@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: anotherclass-123
+  name: api-tester-1231-files
+  labels:
+    part-of: k8s-anotherclass
+    component: backend-server
+    name: api-tester
+    instance: api-tester-1231
+    version: 1.0.0
+    managed-by: kubectl
+spec:
+  resources:
+    requests:
+      storage: 2G
+  accessModes:
+    - ReadWriteMany
+  selector:
+    matchLabels:
+      part-of: k8s-anotherclass
+      component: backend-server
+      name: api-tester
+      instance: api-tester-1231-files
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: api-tester-1231-files
+  labels:
+    part-of: k8s-anotherclass
+    component: backend-server
+    name: api-tester
+    instance: api-tester-1231-files
+    version: 1.0.0
+    managed-by: dashboard
+spec:
+  capacity:
+    storage: 2G
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  local:
+    path: "/root/k8s-local-volume/1231"
+  nodeAffinity: # Node에 대한 제약 조건, 필요한 Node를 선택하기 위한 조건을 지정
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - {key: kubernetes.io/hostname, operator: In, values: [k8s-master]}

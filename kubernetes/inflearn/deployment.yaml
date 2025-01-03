@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: # Object의 메타데이터
+  namespace: anotherclass-123 # Object가 속한 Namespace의 이름
+  name: api-tester-1231 # Object의 이름, 같은 유형의 Object 안에서 고유해야 함
+  labels:
+    part-of: k8s-anotherclass # 어플리케이션의 전체 이름
+    component: backend-server # 어플리케이션의 구성 요소, 서비스의 역할
+    name: api-tester # 어플리케이션의 이름
+    instance: api-tester-1231 # 어플리케이션의 인스턴스 이름, 목적에 따라 여러 개의 어플리케이션을 구분하기 위한 이름
+    version: 1.0.0 # 어플리케이션의 버전, 어플리케이션이 수정될 때마다 변경
+    managed-by: dashboard # Object를 생성한 도구의 이름
+spec: # Object의 명세
+  selector: # Deployment가 관리하는 Pod를 선택하기 위한 레이블 셀렉터
+    matchLabels: # Deployment가 관리하는 Pod를 선택하기 위한 레이블 셀렉터
+      part-of: k8s-anotherclass 
+      component: backend-server
+      name: api-tester
+      instance: api-tester-1231
+  replicas: 2 # Pod의 개수
+  strategy:
+    type: RollingUpdate # Pod를 업데이트하는 방법
+  template: # Pod의 템플릿
+    metadata:
+      labels: # Pod의 레이블, selector와 매칭, selector의 내용이 모두 포함되어야 함, 내용 추가는 자유
+        part-of: k8s-anotherclass
+        component: backend-server
+        name: api-tester
+        instance: api-tester-1231
+        version: 1.0.0
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: k8s-master 
+      containers:
+        - name: api-tester-1231
+          image: 1pro/api-tester:v1.0.0
+          ports:
+          - name: http
+            containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: api-tester-1231-properties
+          startupProbe:
+            httpGet:
+              path: "/startup"
+              port: 8080
+            periodSeconds: 5
+            failureThreshold: 36
+          readinessProbe:
+            httpGet:
+              path: "/readiness"
+              port: 8080
+            periodSeconds: 10
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: "/liveness"
+              port: 8080
+            periodSeconds: 10
+            failureThreshold: 3
+          resources:
+            requests:
+              memory: "100Mi"
+              cpu: "100m"
+            limits:
+              memory: "200Mi"
+              cpu: "200m"
+          volumeMounts:
+            - name: files
+              mountPath: /usr/src/myapp/files/dev
+            - name: secret-datasource
+              mountPath: /usr/src/myapp/datasource
+      volumes:
+        - name: files
+          persistentVolumeClaim:
+            claimName: api-tester-1231-files
+        - name: secret-datasource
+          secret:
+            secretName: api-tester-1231-postgresql

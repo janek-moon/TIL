@@ -42,7 +42,7 @@ spec:
     - ReadWriteMany
   local:
     path: "C:/Users/EunhoMoon/Documents/dev/study/til/kubernetes/inflearn/1231"
-  nodeAffinity: # Node에 대한 제약 조건, 필요한 Node를 선택하기 위한 조건을 지정
+  nodeAffinity: # Node에 대한 제약 조건, 어떤 Node에 Pod를 배치할지 결정
     required:
       nodeSelectorTerms:
         - matchExpressions:

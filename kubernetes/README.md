@@ -88,3 +88,12 @@
   - DNS 사용(예: [service-name].[namespace].svc.cluster.local)
 - NodePort: 외부에서 접근 가능, Node의 IP와 Port를 통해 접근 가능
 - LoadBalancer: 외부에서 접근 가능, 클라우드 서비스의 로드 밸런서를 사용하여 외부로 노출
+
+### Kubernetes Probe
+
+- Application의 상태를 확인하고, 상태에 따라 Pod의 상태를 변경(재시작, 중지, 외부 노출 등)
+- Probe Type
+  - Startup Probe: Pod가 시작되었는지 확인(App health check)
+  - Liveness Probe: Pod가 정상적으로 작동하는지 확인(요청을 처리할 준비가 되었는지 확인, 외부 노출은 하지 않는 상태)
+  - Readiness Probe: Pod가 요청을 처리할 준비가 되었는지 확인(외부 노출을 위한 상태)
+- Probe를 위한 API는 반복적으로 호출되어야 하기 때문에 가볍게 구성해야 한다.

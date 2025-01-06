@@ -30,7 +30,8 @@ spec: # Object의 명세
         version: 1.0.0
     spec:
       nodeSelector:
-        kubernetes.io/hostname: k8s-master 
+        # kubernetes.io/hostname: k8s-master 
+        kubernetes.io/hostname: minikube 
       containers:
         - name: api-tester-1231
           image: 1pro/api-tester:v1.0.0
@@ -40,19 +41,20 @@ spec: # Object의 명세
           envFrom:
             - configMapRef:
                 name: api-tester-1231-properties
-          startupProbe:
+          # Probe: Pod의 상태를 확인하기 위한 방법
+          startupProbe: # Pod가 시작될 때 실행되는 Probe, 성공 시 readinessProbe와 livenessProbe가 실행됨
             httpGet:
               path: "/startup"
               port: 8080
             periodSeconds: 5
             failureThreshold: 36
-          readinessProbe:
+          readinessProbe: # Pod가 준비 상태인지 확인하는 Probe, 성공 시 Pod가 서비스 요청을 처리할 수 있음
             httpGet:
               path: "/readiness"
               port: 8080
             periodSeconds: 10
             failureThreshold: 3
-          livenessProbe:
+          livenessProbe: # Pod가 살아 있는지 확인하는 Probe, 정해진 횟수만큼 실패하면 Pod를 재시작
             httpGet:
               path: "/liveness"
               port: 8080

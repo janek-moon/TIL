@@ -1,0 +1,16 @@
+services:
+  maria :
+    image: mariadb:lts-ubi
+    container_name: mariadb
+    ports:
+      - 3316:3306
+    volumes:
+      - ~/docker/mariadb/etc/mysql/conf.d:/etc/mysql/conf.d:ro
+      - ~/docker/mariadb/var/lib/mysql:/var/lib/mysql
+      - ~/docker/mariadb/var/log/maria:/var/log/maria
+    environment:
+      - TZ="Asia/Seoul"
+      - MARIADB_ROOT_PASSWORD=1234
+      - MARIADB_USER=admin
+      - MARIADB_DATABASE=membership
+    restart: always

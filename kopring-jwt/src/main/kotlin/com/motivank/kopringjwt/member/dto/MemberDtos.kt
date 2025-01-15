@@ -9,9 +9,7 @@ import jakarta.validation.constraints.Pattern
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-data class MemberRequest(
-    val id: Long?,
-
+data class MemberCreateRequest(
     @field:NotBlank
     @JsonProperty("loginId")
     private val _loginId: String?,
@@ -64,6 +62,25 @@ data class MemberRequest(
 
 }
 
+data class MemberUpdateRequest(
+    var id: Long?,
+
+    @field:NotBlank
+    @JsonProperty("name")
+    private val _name: String?,
+
+    @field:NotBlank
+    @field:Email
+    @JsonProperty("email")
+    private val _email: String?,
+) {
+    val name: String
+        get() = _name!!
+    val email: String
+        get() = _email!!
+
+}
+
 data class LoginRequest(
     @field:NotBlank
     @JsonProperty("loginId")
@@ -78,3 +95,12 @@ data class LoginRequest(
     val password: String
         get() = _password!!
 }
+
+data class MemberResponse(
+    val id: Long,
+    val loginId: String,
+    val name: String,
+    val birthDate: String,
+    val gender: String,
+    val email: String,
+)

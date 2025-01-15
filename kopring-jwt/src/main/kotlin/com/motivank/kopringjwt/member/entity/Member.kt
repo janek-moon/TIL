@@ -2,9 +2,12 @@ package com.motivank.kopringjwt.member.entity
 
 import com.motivank.kopringjwt.common.status.Gender
 import com.motivank.kopringjwt.common.status.ROLE
-import com.motivank.kopringjwt.member.dto.MemberRequest
+import com.motivank.kopringjwt.member.dto.MemberCreateRequest
+import com.motivank.kopringjwt.member.dto.MemberResponse
+import com.motivank.kopringjwt.member.dto.MemberUpdateRequest
 import jakarta.persistence.*
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @Entity
 @Table(uniqueConstraints = [UniqueConstraint(name = "uk_member_login_id", columnNames = ["loginId"])])
@@ -17,10 +20,10 @@ class Member(
     val loginId: String,
 
     @Column(nullable = false, length = 100)
-    val password: String,
+    var password: String,
 
     @Column(nullable = false, length = 10)
-    val name: String,
+    var name: String,
 
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
@@ -31,13 +34,13 @@ class Member(
     val gender: Gender,
 
     @Column(nullable = false, length = 30)
-    val email: String,
+    var email: String,
 ) {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
     val memberRole: List<MemberRole>? = null
 
     companion object {
-        fun of(memberRequest: MemberRequest, encodedPassword: String): Member {
+        fun of(memberRequest: MemberCreateRequest, encodedPassword: String): Member {
             return Member(
                 id = null,
                 loginId = memberRequest.loginId,
@@ -49,6 +52,25 @@ class Member(
             )
         }
     }
+
+    fun update(memberRequest: MemberUpdateRequest) {
+        this.name = memberRequest.name
+        this.email = memberRequest.email
+    }
+
+    fun toDto(): MemberResponse =
+        MemberResponse(
+            id = id!!,
+            loginId = loginId,
+            name = name,
+            birthDate = birthDate.formatDate(),
+            gender = gender.description,
+            email = email,
+        )
+
+    private fun LocalDate.formatDate(): String =
+        this.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+
 }
 
 @Entity

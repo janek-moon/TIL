@@ -32,3 +32,5 @@ logging:
         SQL: debug
         type:
           descriptor.sql: trace
+jwt:
+  secret: DSasldkjasldkj21387109sadlfhlaXCnwasdfasdf38aASDsdf

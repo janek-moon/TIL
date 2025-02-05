@@ -9,3 +9,7 @@ enum class ResultCode(val message: String) {
     SUCCESS("성공"),
     ERROR("실패")
 }
+
+enum class ROLE {
+    MEMBER,
+}

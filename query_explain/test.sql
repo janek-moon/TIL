@@ -1,0 +1,13 @@
+SELECT * FROM users WHERE age > 25;
+
+EXPLAIN SELECT * FROM users WHERE age > 25;
+
+EXPLAIN ANALYZE SELECT * FROM users WHERE age > 25;
+
+# INDEX 적용 후
+
+CREATE INDEX idx_age ON users(age);
+
+EXPLAIN SELECT * FROM users WHERE age > 25;
+
+EXPLAIN ANALYZE SELECT * FROM users WHERE age > 25;

@@ -1,0 +1,114 @@
+[versions]
+# Kotlin (Spring Boot가 관리하지 않음)
+kotlin = "2.0.20"
+kotlinx-datetime = "0.6.1"
+
+# Test (Spring Boot가 관리하지 않음)
+kotest = "5.9.1"
+kotest-extensions-property = "2.1.2"
+kotest-extensions-datetime = "2.0.0"
+kotest-extensions-spring = "1.3.0"
+kotest-extensions-now-jvm = "5.9.1"
+
+mockk = "1.13.10"
+mockito-kotlin = "5.3.1"
+
+# Database (일부는 Spring Boot가 관리)
+querydsl = "5.0.0"
+hypersistence-utils = "3.9.0"
+p6spy = "1.9.1"
+
+# OKio
+okio = "3.10.2"
+
+# Logging (Spring Boot가 관리하지 않음)
+loki-logback = "1.5.1"
+logstash-encoder = "8.0"
+
+# Security (Spring Boot가 관리하지 않음)
+jwt = "0.12.6"
+
+# GraphQL (Spring Boot가 관리하지 않음)
+graphql-java-extended-scalars = "22.0"
+
+# Utilities (Spring Boot가 관리하지 않음)
+apache-commons-lang3 = "3.15.0"
+libphonenumber = "8.13.31"
+json = "20240303"
+yauaa = "7.29.0"
+
+# DICOM (Spring Boot가 관리하지 않음)
+dcm4che = "5.33.0"
+
+# Code Quality (Spring Boot가 관리하지 않음)
+spotless = "6.23.3"
+
+# Shell
+datafaker = "2.4.2"
+
+
+[libraries]
+# Kotlin
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
+
+# Test
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockito-kotlin" }
+kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
+kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
+kotest-property = { module = "io.kotest:kotest-property", version.ref = "kotest" }
+kotest-property-arbs = { module = "io.kotest.extensions:kotest-property-arbs", version.ref = "kotest-extensions-property" }
+kotest-property-datetime = { module = "io.kotest.extensions:kotest-property-datetime", version.ref = "kotest-extensions-datetime" }
+kotest-extensions-spring = { module = "io.kotest.extensions:kotest-extensions-spring", version.ref = "kotest-extensions-spring" }
+kotest-extensions-now = { module = "io.kotest:kotest-extensions-now-jvm", version.ref = "kotest-extensions-now-jvm" }
+
+# Database - Spring Boot가 관리하지 않는 부분만
+querydsl-jpa = { module = "com.querydsl:querydsl-jpa", version.ref = "querydsl" }
+querydsl-apt = { module = "com.querydsl:querydsl-apt", version.ref = "querydsl" }
+hypersistence-utils = { module = "io.hypersistence:hypersistence-utils-hibernate-63", version.ref = "hypersistence-utils" }
+p6spy = { module = "com.github.gavlyukovskiy:p6spy-spring-boot-starter", version.ref = "p6spy" }
+
+# OKio
+okio = { module = "com.squareup.okio:okio", version.ref = "okio" }
+
+# Logging
+loki-logback = { module = "com.github.loki4j:loki-logback-appender", version.ref = "loki-logback" }
+logstash-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version.ref = "logstash-encoder" }
+
+# JWT
+jwt-api = { module = "io.jsonwebtoken:jjwt-api", version.ref = "jwt" }
+jwt-impl = { module = "io.jsonwebtoken:jjwt-impl", version.ref = "jwt" }
+jwt-jackson = { module = "io.jsonwebtoken:jjwt-jackson", version.ref = "jwt" }
+
+# GraphQL - Spring Boot가 관리하지 않는 부분만
+graphql-java-extended-scalars = { module = "com.graphql-java:graphql-java-extended-scalars", version.ref = "graphql-java-extended-scalars" }
+
+# Utilities
+apache-commons-lang3 = { module = "org.apache.commons:commons-lang3", version.ref = "apache-commons-lang3" }
+libphonenumber = { module = "com.googlecode.libphonenumber:libphonenumber", version.ref = "libphonenumber" }
+json = { module = "org.json:json", version.ref = "json" }
+yauaa = { module = "nl.basjes.parse.useragent:yauaa", version.ref = "yauaa" }
+
+# DICOM
+dcm4che-core = { module = "org.dcm4che:dcm4che-core", version.ref = "dcm4che" }
+dcm4che-net = { module = "org.dcm4che:dcm4che-net", version.ref = "dcm4che" }
+dcm4che-dict = { module = "org.dcm4che:dcm4che-dict", version.ref = "dcm4che" }
+dcm4che-dict-priv = { module = "org.dcm4che:dcm4che-dict-priv", version.ref = "dcm4che" }
+
+# Shell
+datafaker = { module = "net.datafaker:datafaker", version.ref = "datafaker" }
+
+[bundles]
+kotlin-base = ["kotlin-stdlib", "kotlin-reflect"]
+kotest = ["kotest-runner-junit5", "kotest-assertions-core", "kotest-property", "kotest-property-arbs", "kotest-property-datetime", "kotest-extensions-spring", "kotest-extensions-now"]
+jwt = ["jwt-api", "jwt-impl", "jwt-jackson"]
+dcm4che = ["dcm4che-core", "dcm4che-net", "dcm4che-dict", "dcm4che-dict-priv"]
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
+kotlin-jpa = { id = "org.jetbrains.kotlin.plugin.jpa", version.ref = "kotlin" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }

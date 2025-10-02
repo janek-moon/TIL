@@ -1,0 +1,9 @@
+services:
+  redis:
+    image: redis:8.2.1
+    container_name: redis-server
+    command: ["redis-server", "--requirepass", "${REDIS_PW}"]
+    ports:
+      - "${REDIS_PORT}:6379"
+    environment:
+      - REDIS_PASSWORD=${REDIS_PW}

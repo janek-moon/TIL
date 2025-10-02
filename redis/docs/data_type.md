@@ -12,7 +12,7 @@
 
 ### Hash
 
-- key-value 쌍의 컬렉션
+- 중첩된 key-value 쌍의 컬렉션
 - [Hash Commands](https://redis.io/commands#hash)
 
 ### Set

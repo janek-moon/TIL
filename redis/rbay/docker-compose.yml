@@ -1,0 +1,9 @@
+services:
+  redis:
+    image: redis:7.0-alpine
+    container_name: rbay-redis
+    command: ['redis-server', '--requirepass', '${REDIS_PW}']
+    ports:
+      - '${REDIS_PORT}:6379'
+    environment:
+      - REDIS_PASSWORD=${REDIS_PW}

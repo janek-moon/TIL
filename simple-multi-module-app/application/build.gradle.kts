@@ -7,7 +7,7 @@ apply {
 
 dependencies {
     implementation(project(":web"))
-    implementation(project(":domain"))
+    implementation(project(":infrastructure"))
 
     implementation("org.springframework.boot:spring-boot-starter")
 

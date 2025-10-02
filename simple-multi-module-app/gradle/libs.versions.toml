@@ -13,38 +13,23 @@ kotest-extensions-now-jvm = "5.9.1"
 mockk = "1.13.10"
 mockito-kotlin = "5.3.1"
 
-# Database (일부는 Spring Boot가 관리)
 querydsl = "5.0.0"
 hypersistence-utils = "3.9.0"
 p6spy = "1.9.1"
 
-# OKio
 okio = "3.10.2"
 
-# Logging (Spring Boot가 관리하지 않음)
 loki-logback = "1.5.1"
 logstash-encoder = "8.0"
 
-# Security (Spring Boot가 관리하지 않음)
 jwt = "0.12.6"
 
-# GraphQL (Spring Boot가 관리하지 않음)
-graphql-java-extended-scalars = "22.0"
-
-# Utilities (Spring Boot가 관리하지 않음)
 apache-commons-lang3 = "3.15.0"
 libphonenumber = "8.13.31"
 json = "20240303"
 yauaa = "7.29.0"
 
-# DICOM (Spring Boot가 관리하지 않음)
-dcm4che = "5.33.0"
-
-# Code Quality (Spring Boot가 관리하지 않음)
 spotless = "6.23.3"
-
-# Shell
-datafaker = "2.4.2"
 
 
 [libraries]
@@ -82,29 +67,16 @@ jwt-api = { module = "io.jsonwebtoken:jjwt-api", version.ref = "jwt" }
 jwt-impl = { module = "io.jsonwebtoken:jjwt-impl", version.ref = "jwt" }
 jwt-jackson = { module = "io.jsonwebtoken:jjwt-jackson", version.ref = "jwt" }
 
-# GraphQL - Spring Boot가 관리하지 않는 부분만
-graphql-java-extended-scalars = { module = "com.graphql-java:graphql-java-extended-scalars", version.ref = "graphql-java-extended-scalars" }
-
 # Utilities
 apache-commons-lang3 = { module = "org.apache.commons:commons-lang3", version.ref = "apache-commons-lang3" }
 libphonenumber = { module = "com.googlecode.libphonenumber:libphonenumber", version.ref = "libphonenumber" }
 json = { module = "org.json:json", version.ref = "json" }
 yauaa = { module = "nl.basjes.parse.useragent:yauaa", version.ref = "yauaa" }
 
-# DICOM
-dcm4che-core = { module = "org.dcm4che:dcm4che-core", version.ref = "dcm4che" }
-dcm4che-net = { module = "org.dcm4che:dcm4che-net", version.ref = "dcm4che" }
-dcm4che-dict = { module = "org.dcm4che:dcm4che-dict", version.ref = "dcm4che" }
-dcm4che-dict-priv = { module = "org.dcm4che:dcm4che-dict-priv", version.ref = "dcm4che" }
-
-# Shell
-datafaker = { module = "net.datafaker:datafaker", version.ref = "datafaker" }
-
 [bundles]
 kotlin-base = ["kotlin-stdlib", "kotlin-reflect"]
 kotest = ["kotest-runner-junit5", "kotest-assertions-core", "kotest-property", "kotest-property-arbs", "kotest-property-datetime", "kotest-extensions-spring", "kotest-extensions-now"]
 jwt = ["jwt-api", "jwt-impl", "jwt-jackson"]
-dcm4che = ["dcm4che-core", "dcm4che-net", "dcm4che-dict", "dcm4che-dict-priv"]
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

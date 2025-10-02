@@ -7,3 +7,4 @@ rootProject.name = "simple-multi-module-app"
 include("application")
 include("web")
 include("domain")
+include("infrastructure")

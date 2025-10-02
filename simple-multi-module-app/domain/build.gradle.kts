@@ -5,14 +5,9 @@ plugins {
 }
 
 dependencies {
-    testImplementation(project(":web"))
+    implementation("org.springframework.boot:spring-boot-starter")
 }
 
-allOpen {
-    annotation("jakarta.persistence.Entity")
-    annotation("jakarta.persistence.Embeddable")
-    annotation("jakarta.persistence.MappedSuperclass")
-}
 subprojects {
     apply {
         plugin("org.jetbrains.kotlin.plugin.spring")

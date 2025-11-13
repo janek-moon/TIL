@@ -1,0 +1,5 @@
+name: kcu
+dependencies:
+  - python=3.12
+  - numpy
+  - pandas

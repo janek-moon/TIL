@@ -13,6 +13,7 @@
 ### Hash
 
 - 중첩된 key-value 쌍의 컬렉션
+- value에 다시 key-value 쌍 저장이 가능하지만, null은 불가능
 - [Hash Commands](https://redis.io/commands#hash)
 
 ### Set

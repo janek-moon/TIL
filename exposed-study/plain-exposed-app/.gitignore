@@ -1,0 +1,25 @@
+# Gradle
+.gradle/
+build/
+**/*.iml
+.idea/
+.kotlin/
+.settings/
+gradle-wrapper/gradle-wrapper.jar
+gradle-wrapper/gradle-wrapper.properties
+
+# Local configuration
+local.properties
+
+# Android-specific (if applicable)
+captures/
+.externalNativeBuild/
+app/build/
+app/.cxx/
+
+# Other
+*.log
+*.jar
+*.war
+*.zip
+*.tar

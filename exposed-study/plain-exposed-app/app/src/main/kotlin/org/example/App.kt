@@ -3,8 +3,10 @@
  */
 package org.example
 
+import org.jetbrains.exposed.v1.core.JoinType
 import org.jetbrains.exposed.v1.core.StdOutSqlLogger
 import org.jetbrains.exposed.v1.core.count
+import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.Database
 import org.jetbrains.exposed.v1.jdbc.SchemaUtils
 import org.jetbrains.exposed.v1.jdbc.insert
@@ -19,12 +21,18 @@ fun main() {
         addLogger(StdOutSqlLogger)
         SchemaUtils.create(Tasks)
 
+        val user = User.insert {
+            it[name] = "User 1"
+        }.get(User.id)
+
         val taskId = Tasks.insert {
+            it[Tasks.user] = user
             it[title] = "Task 1"
             it[description] = "Description 1"
         } get Tasks.id
 
         val secondTaskId = Tasks.insert {
+            it[Tasks.user] = user
             it[title] = "Task 2"
             it[description] = "Description 2"
             it[isCompleted] = true
@@ -37,5 +45,9 @@ fun main() {
             .forEach { println("${it[Tasks.isCompleted]}: ${it[Tasks.id.count()]}") }
 
         println("Remaining tasks: ${Tasks.selectAll().toList()}")
+
+        User.join(Tasks, JoinType.INNER, additionalConstraint = { Tasks.user eq User.id })
+            .select(User.name, Tasks.title)
+            .forEach { println("${it[User.name]}: ${it[Tasks.title]}") }
     }
 }

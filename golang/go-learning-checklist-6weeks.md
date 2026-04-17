@@ -12,6 +12,7 @@
 
 ### 학습
 - [ ] **Day 1~2:** A Tour of Go 완주 — https://go.dev/tour
+  - 소스 코드 분석: https://github.com/golang/website/tree/master/_content/tour
 - [ ] **Day 3:** How to Write Go Code — https://go.dev/doc/code
 - [ ] **Day 4:** 공식 튜토리얼 *Getting Started* — https://go.dev/doc/tutorial/getting-started
 - [ ] **Day 5:** 공식 튜토리얼 *Create a Go module* — https://go.dev/doc/tutorial/create-module
